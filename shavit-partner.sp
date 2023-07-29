@@ -52,8 +52,6 @@ public void OnPluginStart()
 		RegConsoleCmd(gS_CMD_UnPartner[i], Command_UnPartner, "Disable your partnership.");
 	}
 
-	RegConsoleCmd("sm_debugpartner", Command_DebugPartner, "Debug partner.");
-
 	HookEvent("player_death", Event_PlayerDeath);
 	HookEvent("player_disconnect", Event_PlayerDisconnect, EventHookMode_Post);
 }
@@ -146,26 +144,6 @@ Action Command_Partner(int client, int args)
 	
 	PartnerMenu(client);
 	
-	return Plugin_Handled;
-}
-
-Action Command_DebugPartner(int client, int args)
-{
-	for(int i = 0; i <= MaxClients; i++)
-	{
-		if (!IsValidClient(i)) {
-			continue;
-		}
-
-		int partner = gI_Partner[i];
-
-		if (partner > 0) {
-			PrintToConsole(client, "%N => partner %N", i, partner);
-		} else {
-			PrintToConsole(client, "%N => partner %d", i, partner);
-		}
-	}
-
 	return Plugin_Handled;
 }
 
